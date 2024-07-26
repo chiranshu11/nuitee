@@ -20,8 +20,8 @@ Before you begin, ensure you have met the following requirements:
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/yourusername/hotel-api.git
-   cd hotel-api
+   git clone https://github.com/chiranshu11/nuitee.git
+   cd liteapi
    ```
 
 2. Install dependencies:
@@ -51,7 +51,7 @@ To run the service locally:
 go run main.go
 ```
 
-The service will start on port 8080. You can access the API endpoint at `http://localhost:8080/hotels`.
+The service will start on port 9001. You can access the API endpoint at `http://localhost:9001/hotels`.
 
 ## Usage
 
@@ -73,7 +73,7 @@ Retrieve hotel rates and details.
 **Example Request:**
 
 ```bash
-curl "http://localhost:8080/hotels?checkin=2024-08-01&checkout=2024-08-10&currency=USD&guestNationality=US&hotelIds=1234,5678&occupancies=[{\"adults\":2,\"children\":0,\"rooms\":1}]"
+curl "http://localhost:9001/hotels?checkin=2024-08-01&checkout=2024-08-10&currency=USD&guestNationality=US&hotelIds=1234,5678&occupancies=[{\"adults\":2,\"children\":0,\"rooms\":1}]"
 ```
 
 **Example Response:**
@@ -106,11 +106,11 @@ To build and run the service using Docker:
 1. Build the Docker image:
 
    ```bash
-   docker build -t hotel-api .
+   docker build -t liteapi .
    ```
 
 2. Run the Docker container:
 
    ```bash
-   docker run -p 8080:8080 hotel-api
+   docker run -p 9001:9001 liteapi
    ```

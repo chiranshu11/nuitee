@@ -7,17 +7,17 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+	"liteapi/constants"
 	"net/http"
+	"os"
 	"strconv"
 	"strings"
 	"time"
 )
 
-const (
-	apiKey    = "aa990ee0a0bea1f360861b62326b150f"
-	apiSecret = "aa5741b256"
-	apiUrl    = "https://api.test.hotelbeds.com/hotel-api/1.0"
-	ratesAPI  = "https://api.exchangerate-api.com/v4/latest/"
+var (
+	apiKey    = os.Getenv("API_KEY")
+	apiSecret = os.Getenv("API_SECRET")
 )
 
 type HotelbedsRequest struct {
@@ -105,7 +105,7 @@ func (h *HotelbedsRequest) ToExternalRequest() (HotelbedsExternalRequest, error)
 }
 
 func FetchHotelbedsRates(targetCurrency string, request HotelbedsExternalRequest) (LiteAPIResponse, error) {
-	reqUrl := fmt.Sprintf("%s/hotels", apiUrl)
+	reqUrl := fmt.Sprintf("%s/hotels", constants.NuiteeApiBaseUrl)
 
 	requestBody, err := json.Marshal(request)
 	if err != nil {

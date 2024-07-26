@@ -14,10 +14,10 @@ RUN go mod download
 COPY . .
 
 # Build the Go app
-RUN go build -o hotel-api .
+RUN go build -o liteapi .
 
-# Expose port 8080 to the outside world
-EXPOSE 8080
+# Expose port 9001 to the outside world
+EXPOSE 9001
 
 # Command to run the executable
-CMD ["./hotel-api"]
+CMD ["./liteapi"]

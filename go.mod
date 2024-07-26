@@ -1,4 +1,4 @@
-module hotel-api
+module liteapi
 
 go 1.21.3
 

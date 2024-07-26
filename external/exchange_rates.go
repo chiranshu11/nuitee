@@ -3,11 +3,12 @@ package external
 import (
 	"encoding/json"
 	"fmt"
+	"liteapi/constants"
 	"net/http"
 )
 
 func FetchExchangeRates(targetCurrency string) (map[string]float64, error) {
-	resp, err := http.Get(fmt.Sprintf("%s%s", ratesAPI, targetCurrency))
+	resp, err := http.Get(fmt.Sprintf("%s%s", constants.ExchangeRateApi, targetCurrency))
 	if err != nil {
 		return nil, err
 	}
