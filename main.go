@@ -2,15 +2,21 @@ package main
 
 import (
 	"liteapi/external"
+	"liteapi/utils"
 	"net/http"
 	"os"
 
 	"github.com/gin-gonic/gin"
 )
 
+func init() {
+	// Load environment variables
+	utils.LoadEnv()
+}
 func main() {
 	gin.SetMode(gin.ReleaseMode)
 	r := gin.Default()
+
 	r.GET("/hotels", getRates)
 	if err := r.Run(":" + os.Getenv("APP_PORT")); err != nil {
 		panic(err.Error())

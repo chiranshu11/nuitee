@@ -8,16 +8,12 @@ import (
 	"fmt"
 	"io"
 	"liteapi/constants"
+	"liteapi/utils"
 	"net/http"
 	"os"
 	"strconv"
 	"strings"
 	"time"
-)
-
-var (
-	apiKey    = os.Getenv("API_KEY")
-	apiSecret = os.Getenv("API_SECRET")
 )
 
 type HotelbedsRequest struct {
@@ -74,6 +70,7 @@ type SupplierInfo struct {
 }
 
 func (h *HotelbedsRequest) ToExternalRequest() (HotelbedsExternalRequest, error) {
+	utils.LoadEnv()
 	hotelIds := strings.Split(h.HotelIds, ",")
 
 	var occupancies []struct {
@@ -120,7 +117,7 @@ func FetchHotelbedsRates(targetCurrency string, request HotelbedsExternalRequest
 	}
 
 	req.Header.Set("Content-Type", "application/json")
-	req.Header.Set("Api-Key", apiKey)
+	req.Header.Set("Api-Key", os.Getenv("AUTH_API_KEY"))
 	req.Header.Set("X-Signature", generateSignature())
 	req.Header.Set("Accept", "application/json")
 
@@ -181,6 +178,6 @@ func FetchHotelbedsRates(targetCurrency string, request HotelbedsExternalRequest
 
 func generateSignature() string {
 	timestamp := strconv.FormatInt(time.Now().Unix(), 10)
-	signature := sha256.Sum256([]byte(apiKey + apiSecret + timestamp))
+	signature := sha256.Sum256([]byte(os.Getenv("AUTH_API_KEY") + os.Getenv("AUTH_API_SECRET") + timestamp))
 	return hex.EncodeToString(signature[:])
 }
